@@ -85,9 +85,16 @@ catshark/
 
 ### Vercel (Recomendado)
 
+El proyecto está completamente optimizado para Vercel. Solo necesitas:
+
+1. Push a GitHub
+2. Conecta el repo en [vercel.com](https://vercel.com)
+3. Vercel detectará Next.js automáticamente
+4. Tu sitio estará listo en minutos
+
 ```bash
 npm i -g vercel
-vercel
+vercel  # para deploy manual
 ```
 
 ### Otras plataformas
@@ -96,8 +103,15 @@ vercel
 # Build para producción
 npm run build
 
-# Iniciar servidor de producción
+# Iniciar servidor de producción (requiere Node.js)
 npm start
+```
+
+### Build optimizado
+
+```bash
+# Análisis del bundle
+npm run build -- --analyze
 ```
 
 ## 📝 Desarrollo
