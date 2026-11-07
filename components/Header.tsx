@@ -3,9 +3,11 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
+import BetaModal from './BetaModal'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
+  const [betaModalOpen, setBetaModalOpen] = useState(false)
 
   const navItems = [
     { label: 'Features', href: '#features' },
@@ -15,13 +17,14 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 border-b border-gray-200">
-      <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <nav className="max-w-7xl mx-auto px-6 py-2 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold text-sm">S</span>
-          </div>
-          <span className="text-xl font-bold text-primary">Statera</span>
+        <Link href="/" className="flex items-center gap-3">
+          <img
+            src="/logo.svg"
+            alt="Statera"
+            className="h-12 w-auto"
+          />
         </Link>
 
         {/* Desktop Menu */}
@@ -38,7 +41,10 @@ export default function Header() {
         </div>
 
         {/* CTA Button */}
-        <button className="hidden md:block px-6 py-2 bg-accent text-white rounded-lg hover:bg-opacity-90 transition-all font-medium">
+        <button
+          onClick={() => setBetaModalOpen(true)}
+          className="hidden md:block px-6 py-2 bg-accent text-white rounded-lg hover:bg-opacity-90 transition-all font-medium"
+        >
           Acceso Beta
         </button>
 
@@ -69,12 +75,20 @@ export default function Header() {
                 {item.label}
               </a>
             ))}
-            <button className="w-full mt-4 px-6 py-2 bg-accent text-white rounded-lg font-medium">
+            <button
+              onClick={() => {
+                setBetaModalOpen(true)
+                setIsOpen(false)
+              }}
+              className="w-full mt-4 px-6 py-2 bg-accent text-white rounded-lg font-medium"
+            >
               Acceso Beta
             </button>
           </div>
         </div>
       )}
+
+      <BetaModal isOpen={betaModalOpen} onClose={() => setBetaModalOpen(false)} />
     </header>
   )
 }

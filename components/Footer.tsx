@@ -29,24 +29,24 @@ export default function Footer() {
             <h4 className="font-semibold mb-4">Producto</h4>
             <ul className="space-y-2 text-sm text-white/60">
               <li>
-                <Link href="#" className="hover:text-accent transition-colors">
+                <Link href="#features" className="hover:text-accent transition-colors">
                   Features
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-accent transition-colors">
+                <a href="https://statera.es/pricing" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
                   Pricing
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="#" className="hover:text-accent transition-colors">
+                <a href="https://api.statera.es/docs" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
                   API
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="#" className="hover:text-accent transition-colors">
+                <a href="https://status.statera.es" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
                   Status
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
@@ -56,24 +56,24 @@ export default function Footer() {
             <h4 className="font-semibold mb-4">Compañía</h4>
             <ul className="space-y-2 text-sm text-white/60">
               <li>
-                <Link href="#" className="hover:text-accent transition-colors">
+                <a href="https://statera.es" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
                   Sobre Nosotros
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="#" className="hover:text-accent transition-colors">
+                <a href="https://blog.statera.es" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
                   Blog
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="#" className="hover:text-accent transition-colors">
+                <a href="mailto:hello@statera.es" className="hover:text-accent transition-colors">
                   Contacto
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="#" className="hover:text-accent transition-colors">
+                <a href="https://statera.es/jobs" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
                   Empleo
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
@@ -83,24 +83,24 @@ export default function Footer() {
             <h4 className="font-semibold mb-4">Legal</h4>
             <ul className="space-y-2 text-sm text-white/60">
               <li>
-                <Link href="#" className="hover:text-accent transition-colors">
+                <a href="https://statera.es/privacy" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
                   Privacidad
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="#" className="hover:text-accent transition-colors">
+                <a href="https://statera.es/terms" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
                   Términos
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="#" className="hover:text-accent transition-colors">
+                <a href="https://statera.es/cookies" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
                   Cookies
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="#" className="hover:text-accent transition-colors">
+                <a href="https://statera.es/gdpr" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
                   RGPD
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
@@ -117,21 +117,27 @@ export default function Footer() {
             {/* Social Links */}
             <div className="flex items-center gap-4 mt-6 md:mt-0">
               <a
-                href="#"
+                href="https://x.com/StateraSL"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
                 title="X (Twitter)"
               >
                 <X className="w-5 h-5" />
               </a>
               <a
-                href="#"
+                href="https://github.com/StateraSL"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
                 title="GitHub"
               >
                 <Code className="w-5 h-5" />
               </a>
               <a
-                href="#"
+                href="https://linkedin.com/company/statera"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
                 title="LinkedIn"
               >

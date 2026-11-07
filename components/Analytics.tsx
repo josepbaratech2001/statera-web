@@ -1,6 +1,10 @@
 'use client'
 
+import { useState } from 'react'
+import BetaModal from './BetaModal'
+
 export default function Analytics() {
+  const [betaModalOpen, setBetaModalOpen] = useState(false)
   return (
     <section id="analytics" className="py-20 px-6 bg-white">
       <div className="max-w-6xl mx-auto">
@@ -33,7 +37,10 @@ export default function Analytics() {
               ))}
             </div>
 
-            <button className="px-8 py-3 bg-accent text-white rounded-lg hover:bg-opacity-90 transition-all font-semibold">
+            <button
+              onClick={() => setBetaModalOpen(true)}
+              className="px-8 py-3 bg-accent text-white rounded-lg hover:bg-opacity-90 transition-all font-semibold"
+            >
               Solicitar Acceso Beta
             </button>
           </div>
@@ -94,6 +101,8 @@ export default function Analytics() {
             </div>
           </div>
         </div>
+
+        <BetaModal isOpen={betaModalOpen} onClose={() => setBetaModalOpen(false)} />
       </div>
     </section>
   )

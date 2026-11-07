@@ -1,8 +1,11 @@
 'use client'
 
+import { useState } from 'react'
 import { Sparkles } from 'lucide-react'
+import BetaModal from './BetaModal'
 
 export default function Hero() {
+  const [betaModalOpen, setBetaModalOpen] = useState(false)
   return (
     <section className="pt-32 pb-20 px-6 bg-gradient-to-b from-surface to-white">
       <div className="max-w-5xl mx-auto text-center">
@@ -29,12 +32,18 @@ export default function Hero() {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-          <button className="px-8 py-4 bg-primary text-white rounded-lg hover:bg-opacity-90 transition-all font-semibold text-lg">
+          <button
+            onClick={() => setBetaModalOpen(true)}
+            className="px-8 py-4 bg-primary text-white rounded-lg hover:bg-opacity-90 transition-all font-semibold text-lg"
+          >
             Explora Statera Analytics
           </button>
-          <button className="px-8 py-4 border-2 border-primary text-primary rounded-lg hover:bg-primary/5 transition-all font-semibold text-lg">
+          <a
+            href="/faq"
+            className="px-8 py-4 border-2 border-primary text-primary rounded-lg hover:bg-primary/5 transition-all font-semibold text-lg inline-block text-center"
+          >
             Documentación
-          </button>
+          </a>
         </div>
 
         {/* Hero Visual */}
@@ -59,6 +68,8 @@ export default function Hero() {
             </div>
           </div>
         </div>
+
+        <BetaModal isOpen={betaModalOpen} onClose={() => setBetaModalOpen(false)} />
       </div>
     </section>
   )

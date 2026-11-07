@@ -1,9 +1,12 @@
 'use client'
 
 import Link from 'next/link'
+import { useState } from 'react'
 import BetaSignup from './BetaSignup'
+import BetaModal from './BetaModal'
 
 export default function CTA() {
+  const [betaModalOpen, setBetaModalOpen] = useState(false)
   return (
     <section className="py-20 px-6 bg-gradient-to-r from-primary via-primary/95 to-primary">
       <div className="max-w-4xl mx-auto">
@@ -32,6 +35,8 @@ export default function CTA() {
             Más preguntas frecuentes →
           </Link>
         </div>
+
+        <BetaModal isOpen={betaModalOpen} onClose={() => setBetaModalOpen(false)} />
       </div>
     </section>
   )
