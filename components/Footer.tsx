@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Twitter, Github, Linkedin } from 'lucide-react'
+import { X, Code, Briefcase } from 'lucide-react'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -119,20 +119,23 @@ export default function Footer() {
               <a
                 href="#"
                 className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+                title="X (Twitter)"
               >
-                <Twitter className="w-5 h-5" />
+                <X className="w-5 h-5" />
               </a>
               <a
                 href="#"
                 className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+                title="GitHub"
               >
-                <Github className="w-5 h-5" />
+                <Code className="w-5 h-5" />
               </a>
               <a
                 href="#"
                 className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+                title="LinkedIn"
               >
-                <Linkedin className="w-5 h-5" />
+                <Briefcase className="w-5 h-5" />
               </a>
             </div>
           </div>
