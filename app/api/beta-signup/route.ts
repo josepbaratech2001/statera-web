@@ -1,8 +1,6 @@
 import { Resend } from 'resend'
 import { NextRequest, NextResponse } from 'next/server'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 interface BetaSignupRequest {
   name: string
   email: string
@@ -13,6 +11,17 @@ interface BetaSignupRequest {
 
 export async function POST(request: NextRequest) {
   try {
+    // Initialize Resend only at runtime
+    const apiKey = process.env.RESEND_API_KEY
+    if (!apiKey) {
+      console.error('RESEND_API_KEY not configured')
+      return NextResponse.json(
+        { error: 'Email service not configured' },
+        { status: 500 }
+      )
+    }
+
+    const resend = new Resend(apiKey)
     const body: BetaSignupRequest = await request.json()
 
     const { name, email, organization, useCase, needs } = body
