@@ -2,6 +2,8 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { ChevronDown } from 'lucide-react'
 
+export const metadata = { title: 'Preguntas frecuentes' }
+
 export default function FAQ() {
   const faqs = [
     {
@@ -12,7 +14,7 @@ export default function FAQ() {
     {
       question: '¿Cómo recolectáis los datos?',
       answer:
-        'Utilizamos pipelines automatizados y eficientes que recopilan datos públicos de X diariamente. Todos los datos se almacenan de forma segura en BigQuery y se procesan con máxima privacidad.',
+        'Utilizamos pipelines automatizados y eficientes que recopilan datos públicos de X diariamente. Los datos se almacenan de forma segura en infraestructura cloud y se tratan conforme al RGPD.',
     },
     {
       question: '¿No estáis señalando a nadie?',
@@ -40,7 +42,7 @@ export default function FAQ() {
         'La beta privada será gratuita para los primeros usuarios. Los precios se anunciarán cuando lancemos la versión pública.',
     },
     {
-      question: '¿Qué datos de privacidad recopilan?',
+      question: '¿Qué datos personales recopiláis?',
       answer:
         'No recopilamos datos personales de usuarios. Solo analizamos tweets públicos y perfiles públicos. Cumplimos con RGPD y todas las regulaciones de privacidad.',
     },
@@ -49,47 +51,47 @@ export default function FAQ() {
   return (
     <main className="w-full">
       <Header />
-      <div className="pt-32 pb-20 px-6 bg-gradient-to-b from-surface to-white min-h-screen">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
-            <h1 className="text-5xl font-bold text-primary mb-4">
-              Preguntas Frecuentes
+      <section className="relative overflow-hidden bg-cream px-6 pb-24 pt-40 md:pt-48">
+        <img
+          src="/brand/statera-icon-butter.svg"
+          alt=""
+          aria-hidden
+          className="pointer-events-none absolute -right-40 top-20 hidden w-[520px] opacity-95 lg:block"
+        />
+        <div className="relative mx-auto max-w-3xl">
+          <div className="mb-14">
+            <p className="eyebrow mb-4">Ayuda</p>
+            <h1 className="mb-4 text-4xl font-medium leading-tight text-burgundy md:text-6xl">
+              Preguntas frecuentes
             </h1>
-            <p className="text-xl text-text-secondary">
-              Todo lo que necesitas saber sobre Statera
+            <p className="text-lg font-light tracking-body text-ink/75">
+              Todo lo que necesitas saber sobre Statera.
             </p>
           </div>
 
-          <div className="space-y-4">
-            {faqs.map((faq, index) => (
-              <details
-                key={index}
-                className="group bg-white border border-gray-200 rounded-lg p-6 hover:border-accent/30 transition-all cursor-pointer"
-              >
-                <summary className="flex items-center justify-between font-semibold text-lg text-primary hover:text-accent transition-colors">
+          <div className="divide-y divide-butter overflow-hidden rounded-brand border border-butter bg-white">
+            {faqs.map((faq) => (
+              <details key={faq.question} className="group px-6 py-5 md:px-8">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-6 font-medium text-burgundy transition-colors hover:text-wine [&::-webkit-details-marker]:hidden">
                   {faq.question}
-                  <ChevronDown className="w-5 h-5 group-open:rotate-180 transition-transform" />
+                  <ChevronDown className="h-5 w-5 shrink-0 text-wine transition-transform group-open:rotate-180" />
                 </summary>
-                <p className="mt-4 text-text-secondary leading-relaxed">
-                  {faq.answer}
-                </p>
+                <p className="mt-4 font-light leading-relaxed tracking-body text-ink/75">{faq.answer}</p>
               </details>
             ))}
           </div>
 
-          <div className="mt-16 bg-accent/10 border border-accent/20 rounded-xl p-8 text-center">
-            <h2 className="text-2xl font-semibold text-primary mb-3">
-              ¿No encuentras lo que buscas?
-            </h2>
-            <p className="text-text-secondary mb-6">
-              Contáctanos directamente o consulta nuestra documentación técnica.
-            </p>
-            <button className="px-6 py-3 bg-accent text-white rounded-lg hover:bg-opacity-90 transition-all font-semibold">
-              Enviar Email
-            </button>
+          <div className="mt-14 flex flex-col items-start justify-between gap-6 rounded-brand bg-burgundy p-8 md:flex-row md:items-center md:p-10">
+            <div>
+              <h2 className="mb-2 text-xl font-medium text-cream">¿No encuentras lo que buscas?</h2>
+              <p className="font-light tracking-body text-cream/75">Escríbenos y te responderemos lo antes posible.</p>
+            </div>
+            <a href="mailto:hello@statera.es" className="btn-on-dark shrink-0">
+              Contactar
+            </a>
           </div>
         </div>
-      </div>
+      </section>
       <Footer />
     </main>
   )

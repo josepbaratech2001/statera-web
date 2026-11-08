@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Mail, CheckCircle, AlertCircle } from 'lucide-react'
+import { CheckCircle, AlertCircle } from 'lucide-react'
 
 interface FormData {
   name: string
@@ -83,88 +83,93 @@ export default function BetaSignup() {
   }
 
   return (
-    <div className="bg-surface border border-gray-200 rounded-xl p-8 md:p-12">
+    <div>
       {submitted ? (
-        <div className="text-center">
-          <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
-            <CheckCircle className="w-8 h-8 text-accent" />
+        <div className="py-6 text-center animate-fade-in">
+          <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-cream ring-1 ring-butter">
+            <CheckCircle className="h-7 w-7 text-burgundy" strokeWidth={1.5} />
           </div>
-          <h3 className="text-2xl font-semibold text-primary mb-2">
-            ¡Solicitud Enviada!
-          </h3>
-          <p className="text-text-secondary mb-2">
+          <h3 className="mb-2 text-2xl font-medium text-burgundy">Solicitud enviada</h3>
+          <p className="mb-2 font-light tracking-body text-ink/75">
             Hemos recibido tu solicitud de acceso a la beta.
           </p>
-          <p className="text-sm text-text-secondary">
-            Te enviaremos un email a {formData.email} con los próximos pasos.
+          <p className="text-sm font-light tracking-body text-wine">
+            Te escribiremos a {formData.email} con los próximos pasos.
           </p>
         </div>
       ) : error ? (
-        <div className="text-center">
-          <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <AlertCircle className="w-8 h-8 text-red-600" />
+        <div className="py-6 text-center animate-fade-in">
+          <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-cream ring-1 ring-butter">
+            <AlertCircle className="h-7 w-7 text-wine" strokeWidth={1.5} />
           </div>
-          <h3 className="text-xl font-semibold text-primary mb-2">
-            Error al enviar
-          </h3>
-          <p className="text-text-secondary mb-4">
-            {error}
-          </p>
-          <button
-            onClick={() => setError('')}
-            className="px-6 py-2 bg-accent text-white rounded-lg hover:bg-opacity-90 transition-all font-semibold"
-          >
+          <h3 className="mb-2 text-xl font-medium text-burgundy">No hemos podido enviar tu solicitud</h3>
+          <p className="mb-6 font-light tracking-body text-ink/75">{error}</p>
+          <button onClick={() => setError('')} className="btn-primary">
             Intentar de nuevo
           </button>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Step 1: Basic Info */}
+          {/* Indicador de pasos */}
+          <div className="flex items-center gap-3 text-xs font-light uppercase tracking-tagline text-wine">
+            <span>Paso {step} de 2</span>
+            <span className="flex flex-1 gap-1.5">
+              <span className="h-0.5 flex-1 rounded-full bg-burgundy" />
+              <span className={`h-0.5 flex-1 rounded-full ${step === 2 ? 'bg-burgundy' : 'bg-butter'}`} />
+            </span>
+          </div>
+
           {step === 1 && (
-            <div className="space-y-4 animate-fade-in">
-              <h3 className="text-lg font-semibold text-primary">Información Básica</h3>
+            <div className="space-y-5 animate-fade-in">
+              <h3 className="text-xl font-medium text-burgundy">Información básica</h3>
 
               <div>
-                <label className="block text-sm font-medium text-primary mb-2">
-                  Nombre Completo *
+                <label htmlFor="beta-name" className="mb-2 block text-sm font-medium text-burgundy">
+                  Nombre completo *
                 </label>
                 <input
+                  id="beta-name"
                   type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
                   placeholder="Tu nombre"
+                  autoComplete="name"
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-accent transition-colors"
+                  className="field"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-primary mb-2">
-                  Email *
+                <label htmlFor="beta-email" className="mb-2 block text-sm font-medium text-burgundy">
+                  Email profesional *
                 </label>
                 <input
+                  id="beta-email"
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  placeholder="tu@email.com"
+                  placeholder="nombre@organizacion.com"
+                  autoComplete="email"
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-accent transition-colors"
+                  className="field"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-primary mb-2">
+                <label htmlFor="beta-org" className="mb-2 block text-sm font-medium text-burgundy">
                   Organización
                 </label>
                 <input
+                  id="beta-org"
                   type="text"
                   name="organization"
                   value={formData.organization}
                   onChange={handleInputChange}
-                  placeholder="Ej: Ministerio, Medio, Partido"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-accent transition-colors"
+                  placeholder="Ej.: institución, medio, partido, consultora"
+                  autoComplete="organization"
+                  className="field"
                 />
               </div>
 
@@ -172,73 +177,79 @@ export default function BetaSignup() {
                 type="button"
                 onClick={() => setStep(2)}
                 disabled={!formData.name || !formData.email}
-                className="w-full mt-6 px-6 py-3 bg-accent text-white rounded-lg hover:bg-opacity-90 transition-all font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                className="btn-primary mt-2 w-full"
               >
-                Continuar →
+                Continuar
               </button>
             </div>
           )}
 
-          {/* Step 2: Needs & Use Case */}
           {step === 2 && (
-            <div className="space-y-4 animate-fade-in">
-              <h3 className="text-lg font-semibold text-primary">Cuéntanos tus Necesidades</h3>
+            <div className="space-y-5 animate-fade-in">
+              <h3 className="text-xl font-medium text-burgundy">Cuéntanos qué necesitas</h3>
 
-              <div>
-                <label className="block text-sm font-medium text-primary mb-3">
+              <fieldset>
+                <legend className="mb-3 block text-sm font-medium text-burgundy">
                   ¿Qué te interesa de Statera? *
-                </label>
-                <div className="space-y-2">
-                  {needs.map((need) => (
-                    <label key={need} className="flex items-center cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={formData.needs.includes(need)}
-                        onChange={() => handleNeedsChange(need)}
-                        className="w-4 h-4 text-accent rounded"
-                      />
-                      <span className="ml-3 text-text-secondary">{need}</span>
-                    </label>
-                  ))}
+                </legend>
+                <div className="grid gap-2 sm:grid-cols-2">
+                  {needs.map((need) => {
+                    const checked = formData.needs.includes(need)
+                    return (
+                      <label
+                        key={need}
+                        className={`flex cursor-pointer items-center gap-3 rounded-brand border px-4 py-3 text-sm font-light tracking-body transition-colors ${
+                          checked
+                            ? 'border-burgundy bg-cream text-burgundy'
+                            : 'border-burgundy/15 text-ink/80 hover:border-wine/50'
+                        }`}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={checked}
+                          onChange={() => handleNeedsChange(need)}
+                          className="h-4 w-4 accent-[#4c102a]"
+                        />
+                        {need}
+                      </label>
+                    )
+                  })}
                 </div>
-              </div>
+              </fieldset>
 
               <div>
-                <label className="block text-sm font-medium text-primary mb-2">
+                <label htmlFor="beta-usecase" className="mb-2 block text-sm font-medium text-burgundy">
                   Describe tu caso de uso *
                 </label>
                 <textarea
+                  id="beta-usecase"
                   name="useCase"
                   value={formData.useCase}
                   onChange={handleInputChange}
-                  placeholder="Cuéntanos qué quieres lograr con Statera Analytics..."
+                  placeholder="¿Qué te gustaría conseguir con Statera Analytics?"
                   required
                   rows={4}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-accent transition-colors resize-none"
+                  className="field resize-none"
                 />
               </div>
 
               <div className="flex gap-3">
-                <button
-                  type="button"
-                  onClick={() => setStep(1)}
-                  className="flex-1 px-6 py-3 border-2 border-primary text-primary rounded-lg hover:bg-primary/5 transition-all font-semibold"
-                >
-                  ← Atrás
+                <button type="button" onClick={() => setStep(1)} className="btn-secondary flex-1">
+                  Atrás
                 </button>
                 <button
                   type="submit"
                   disabled={loading || formData.needs.length === 0 || !formData.useCase}
-                  className="flex-1 px-6 py-3 bg-accent text-white rounded-lg hover:bg-opacity-90 transition-all font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="btn-primary flex-1"
                 >
-                  {loading ? 'Enviando...' : 'Solicitar Acceso'}
+                  {loading ? 'Enviando…' : 'Solicitar acceso'}
                 </button>
               </div>
             </div>
           )}
 
-          <p className="text-xs text-text-secondary text-center">
-            Tus datos serán enviados a nuestro equipo de forma segura
+          <p className="text-center text-xs font-light tracking-body text-ink/55">
+            Tratamos tus datos de forma confidencial y solo para gestionar tu acceso.
           </p>
         </form>
       )}

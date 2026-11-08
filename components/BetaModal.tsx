@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 import { X } from 'lucide-react'
 import BetaSignup from './BetaSignup'
+import Logo from './Logo'
 
 interface BetaModalProps {
   isOpen: boolean
@@ -11,31 +12,43 @@ interface BetaModalProps {
 
 export default function BetaModal({ isOpen, onClose }: BetaModalProps) {
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'unset'
-    }
-
+    if (!isOpen) return
+    document.body.style.overflow = 'hidden'
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
+    window.addEventListener('keydown', onKey)
     return () => {
-      document.body.style.overflow = 'unset'
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', onKey)
     }
-  }, [isOpen])
+  }, [isOpen, onClose])
 
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-        <div className="sticky top-0 bg-white border-b border-gray-200 px-8 py-6 flex items-center justify-between">
-          <h2 className="text-2xl font-bold text-primary">
-            Solicitar Acceso a Beta
-          </h2>
+    <div
+      className="fixed inset-0 z-[60] flex animate-fade-in items-center justify-center bg-ink/60 p-4 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="beta-modal-title"
+        className="max-h-[90vh] w-full max-w-xl overflow-y-auto rounded-brand bg-white shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="sticky top-0 z-10 flex items-center justify-between border-b border-butter bg-cream px-8 py-5">
+          <div className="flex items-center gap-3">
+            <Logo variant="icon" className="h-7 w-auto" />
+            <h2 id="beta-modal-title" className="text-lg font-medium text-burgundy">
+              Solicitar acceso a la beta
+            </h2>
+          </div>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            aria-label="Cerrar"
+            className="rounded-full p-2 text-burgundy transition-colors hover:bg-butter"
           >
-            <X className="w-6 h-6 text-primary" />
+            <X className="h-5 w-5" />
           </button>
         </div>
 

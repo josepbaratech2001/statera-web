@@ -1,150 +1,110 @@
-'use client'
-
 import Link from 'next/link'
-import { X, Code, Briefcase } from 'lucide-react'
+import Logo from './Logo'
+
+const columns = [
+  {
+    title: 'Producto',
+    links: [
+      { label: 'Plataforma', href: '/#features' },
+      { label: 'Metodología', href: '/#how-it-works' },
+      { label: 'Statera Analytics', href: '/#analytics' },
+      { label: 'Preguntas frecuentes', href: '/faq' },
+    ],
+  },
+  {
+    title: 'Compañía',
+    links: [
+      { label: 'Sobre nosotros', href: 'https://statera.es', external: true },
+      { label: 'Blog', href: 'https://blog.statera.es', external: true },
+      { label: 'Contacto', href: 'mailto:hello@statera.es' },
+    ],
+  },
+  {
+    title: 'Legal',
+    links: [
+      { label: 'Privacidad', href: 'https://statera.es/privacy', external: true },
+      { label: 'Términos', href: 'https://statera.es/terms', external: true },
+      { label: 'Cookies', href: 'https://statera.es/cookies', external: true },
+    ],
+  },
+]
+
+function XIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden className="h-4 w-4 fill-current">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  )
+}
+
+function LinkedInIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden className="h-4 w-4 fill-current">
+      <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z" />
+    </svg>
+  )
+}
+
+const socials = [
+  { label: 'X', href: 'https://x.com/StateraSL', Icon: XIcon },
+  { label: 'LinkedIn', href: 'https://linkedin.com/company/statera', Icon: LinkedInIcon },
+]
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-primary text-white">
-      <div className="max-w-6xl mx-auto px-6 py-16">
-        {/* Content */}
-        <div className="grid md:grid-cols-4 gap-8 mb-12">
-          {/* Brand */}
+    <footer className="bg-ink text-cream">
+      <div className="mx-auto max-w-6xl px-6 pb-10 pt-20">
+        <div className="mb-16 grid gap-12 md:grid-cols-[1.4fr_repeat(3,1fr)]">
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center">
-                <span className="font-bold text-sm">S</span>
-              </div>
-              <span className="text-xl font-bold">Statera</span>
-            </div>
-            <p className="text-white/60 text-sm">
-              Escuchamos la voz de la sociedad en tiempo real.
+            <Link href="/" aria-label="Statera — inicio" className="mb-6 inline-block">
+              <Logo color="cream" className="w-[160px]" />
+            </Link>
+            <p className="mb-8 text-xs font-light uppercase tracking-tagline text-butter">
+              Social listening &amp; insights
             </p>
+            <div className="flex gap-3">
+              {socials.map(({ label, href, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-cream/20 text-cream transition-colors hover:border-butter hover:bg-butter hover:text-burgundy"
+                >
+                  <Icon />
+                </a>
+              ))}
+            </div>
           </div>
 
-          {/* Product */}
-          <div>
-            <h4 className="font-semibold mb-4">Producto</h4>
-            <ul className="space-y-2 text-sm text-white/60">
-              <li>
-                <Link href="#features" className="hover:text-accent transition-colors">
-                  Features
-                </Link>
-              </li>
-              <li>
-                <a href="https://statera.es/pricing" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
-                  Pricing
-                </a>
-              </li>
-              <li>
-                <a href="https://api.statera.es/docs" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
-                  API
-                </a>
-              </li>
-              <li>
-                <a href="https://status.statera.es" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
-                  Status
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Company */}
-          <div>
-            <h4 className="font-semibold mb-4">Compañía</h4>
-            <ul className="space-y-2 text-sm text-white/60">
-              <li>
-                <a href="https://statera.es" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
-                  Sobre Nosotros
-                </a>
-              </li>
-              <li>
-                <a href="https://blog.statera.es" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a href="mailto:hello@statera.es" className="hover:text-accent transition-colors">
-                  Contacto
-                </a>
-              </li>
-              <li>
-                <a href="https://statera.es/jobs" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
-                  Empleo
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Legal */}
-          <div>
-            <h4 className="font-semibold mb-4">Legal</h4>
-            <ul className="space-y-2 text-sm text-white/60">
-              <li>
-                <a href="https://statera.es/privacy" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
-                  Privacidad
-                </a>
-              </li>
-              <li>
-                <a href="https://statera.es/terms" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
-                  Términos
-                </a>
-              </li>
-              <li>
-                <a href="https://statera.es/cookies" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
-                  Cookies
-                </a>
-              </li>
-              <li>
-                <a href="https://statera.es/gdpr" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
-                  RGPD
-                </a>
-              </li>
-            </ul>
-          </div>
+          {columns.map((col) => (
+            <div key={col.title}>
+              <h4 className="mb-5 text-sm font-medium text-cream">{col.title}</h4>
+              <ul className="space-y-3 text-sm font-light tracking-body text-cream/65">
+                {col.links.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      {...('external' in link && link.external
+                        ? { target: '_blank', rel: 'noopener noreferrer' }
+                        : {})}
+                      className="transition-colors hover:text-butter"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
-        {/* Divider */}
-        <div className="border-t border-white/10 py-8">
-          {/* Bottom */}
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <p className="text-white/60 text-sm">
-              © {currentYear} Statera. Todos los derechos reservados.
-            </p>
-
-            {/* Social Links */}
-            <div className="flex items-center gap-4 mt-6 md:mt-0">
-              <a
-                href="https://x.com/StateraSL"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
-                title="X (Twitter)"
-              >
-                <X className="w-5 h-5" />
-              </a>
-              <a
-                href="https://github.com/StateraSL"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
-                title="GitHub"
-              >
-                <Code className="w-5 h-5" />
-              </a>
-              <a
-                href="https://linkedin.com/company/statera"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
-                title="LinkedIn"
-              >
-                <Briefcase className="w-5 h-5" />
-              </a>
-            </div>
-          </div>
+        <div className="flex flex-col items-center justify-between gap-4 border-t border-cream/10 pt-8 text-xs font-light tracking-body text-cream/55 md:flex-row">
+          <p>© {currentYear} Statera. Todos los derechos reservados.</p>
+          <p>Escuchamos lo que importa.</p>
         </div>
       </div>
     </footer>

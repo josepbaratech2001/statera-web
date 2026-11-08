@@ -1,76 +1,71 @@
 'use client'
 
 import { useState } from 'react'
-import { Sparkles } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import BetaModal from './BetaModal'
+
+const stats = [
+  { value: '500+', label: 'Perfiles monitorizados' },
+  { value: '1M+', label: 'Publicaciones analizadas al día' },
+  { value: '94%', label: 'Precisión de clasificación' },
+]
 
 export default function Hero() {
   const [betaModalOpen, setBetaModalOpen] = useState(false)
+
   return (
-    <section className="pt-32 pb-20 px-6 bg-gradient-to-b from-surface to-white">
-      <div className="max-w-5xl mx-auto text-center">
-        {/* Badge */}
-        <div className="inline-block mb-8 px-4 py-2 bg-accent/10 rounded-full border border-accent/20">
-          <span className="text-accent font-semibold flex items-center gap-2">
-            <Sparkles className="w-4 h-4" />
-            Inteligencia de datos en tiempo real
-          </span>
-        </div>
+    <section className="relative overflow-hidden bg-cream px-6 pb-24 pt-40 md:pb-32 md:pt-48">
+      {/* Decoración de marca: icono grande recortado a la derecha en Mantequilla */}
+      <div aria-hidden className="pointer-events-none absolute -right-40 top-16 hidden w-[620px] opacity-95 lg:block">
+        <img src="/brand/statera-icon-butter.svg" alt="" className="w-full" />
+      </div>
+      <div aria-hidden className="pointer-events-none absolute bottom-10 right-[38%] hidden w-16 opacity-40 lg:block">
+        <img src="/brand/statera-icon-butter.svg" alt="" className="w-full" />
+      </div>
 
-        {/* Main Headline */}
-        <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-          <span className="text-gradient">Escuchamos lo que</span>
-          {' '}
-          <span className="text-primary">importa</span>
-        </h1>
+      <div className="relative mx-auto max-w-6xl">
+        <div className="max-w-3xl animate-fade-in-up">
+          <p className="eyebrow mb-8">Social listening &amp; insights</p>
 
-        <p className="text-xl md:text-2xl text-text-secondary mb-12 max-w-3xl mx-auto leading-relaxed">
-          Análisis inteligente de tendencias políticas y de actualidad en X en España.
-          Descubre patrones de opinión sin prejuicios, para que los que realmente importa
-          tengan información clara y precisa.
-        </p>
+          <h1 className="mb-8 text-5xl font-medium leading-[1.08] tracking-tight text-burgundy md:text-7xl">
+            Escuchamos
+            <br />
+            lo que importa.
+          </h1>
 
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-          <button
-            onClick={() => setBetaModalOpen(true)}
-            className="px-8 py-4 bg-primary text-white rounded-lg hover:bg-opacity-90 transition-all font-semibold text-lg"
-          >
-            Explora Statera Analytics
-          </button>
-          <a
-            href="/faq"
-            className="px-8 py-4 border-2 border-primary text-primary rounded-lg hover:bg-primary/5 transition-all font-semibold text-lg inline-block text-center"
-          >
-            Documentación
-          </a>
-        </div>
+          <p className="mb-12 max-w-2xl text-lg font-light leading-relaxed tracking-body text-ink/80 md:text-xl">
+            Analizamos la conversación política y de actualidad en España para ofrecer una
+            lectura clara y objetiva de la opinión pública. Sin juicios. Sin sesgos. Solo datos.
+          </p>
 
-        {/* Hero Visual */}
-        <div className="relative">
-          <div className="absolute inset-0 gradient-accent opacity-5 rounded-2xl blur-3xl"></div>
-          <div className="relative bg-white border border-gray-200 rounded-2xl p-8 md:p-12 shadow-xl">
-            <div className="grid grid-cols-3 gap-4 md:gap-8">
-              {[
-                { label: 'Perfiles Seguidos', value: '500+' },
-                { label: 'Análisis Diarios', value: '1M+' },
-                { label: 'Precisión IA', value: '94%' },
-              ].map((stat) => (
-                <div key={stat.label} className="text-center">
-                  <div className="text-3xl md:text-4xl font-bold text-accent mb-2">
-                    {stat.value}
-                  </div>
-                  <div className="text-sm text-text-secondary">
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </div>
+          <div className="flex flex-col gap-4 sm:flex-row">
+            <button onClick={() => setBetaModalOpen(true)} className="btn-primary px-8 py-4">
+              Solicitar acceso a la beta
+              <ArrowRight className="h-4 w-4" />
+            </button>
+            <a href="#how-it-works" className="btn-secondary px-8 py-4">
+              Conocer la metodología
+            </a>
           </div>
         </div>
 
-        <BetaModal isOpen={betaModalOpen} onClose={() => setBetaModalOpen(false)} />
+        {/* Cifras */}
+        <dl className="mt-20 grid max-w-4xl grid-cols-1 gap-px overflow-hidden rounded-brand border border-butter bg-butter sm:grid-cols-3 md:mt-28">
+          {stats.map((stat) => (
+            <div key={stat.label} className="flex flex-col-reverse justify-end bg-white px-8 py-7">
+              <dt className="mt-2 text-sm font-light tracking-body text-wine">{stat.label}</dt>
+              <dd className="text-4xl font-medium text-burgundy">{stat.value}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
+
+      {/* Decoración reducida en móvil/tablet */}
+      <div aria-hidden className="pointer-events-none absolute -right-16 -top-4 w-56 opacity-60 lg:hidden">
+        <img src="/brand/statera-icon-butter.svg" alt="" className="w-full" />
+      </div>
+
+      <BetaModal isOpen={betaModalOpen} onClose={() => setBetaModalOpen(false)} />
     </section>
   )
 }

@@ -16,11 +16,16 @@ Sitio web oficial de **Statera**, una plataforma de social listening que analiza
 - **Framework**: Next.js 14 con TypeScript
 - **Estilos**: Tailwind CSS
 - **Iconos**: Lucide React
-- **Colores**:
-  - Primary: #1E2B3C (azul oscuro)
-  - Accent: #B07D2B (dorado)
-  - Light: #F5F0E6 (beige)
-  - Surface: #F9F7F4 (gris muy claro)
+- **Tipografía**: Poppins (via `next/font/google`) — Light 300 cuerpo, Medium 500 títulos
+- **Marca**: sistema Statera v1.0 (skill `statera-branding`). Paleta única permitida:
+  - Burdeos `#4c102a` (`burgundy`) — primario, títulos, botones
+  - Crema `#fff7e2` (`cream`) — fondo principal
+  - Vino `#761941` (`wine`) — acento, hover, textos secundarios
+  - Tinta `#220713` (`ink`) — texto, fondos muy oscuros
+  - Mantequilla `#ffe9af` (`butter`) — resaltes, bordes suaves
+  - Blanco `#ffffff` — tarjetas
+- **Logos**: `public/brand/` (lockup horizontal e icono en cada color). Usar siempre el componente `Logo`; nunca re-teclear el wordmark en una fuente.
+- **Clases de marca** (`globals.css`): `.btn-primary`, `.btn-secondary`, `.btn-on-dark`, `.field`, `.eyebrow`, `.powered-by-statera`
 
 ## Estructura de Componentes
 
@@ -58,7 +63,7 @@ npm run dev
 
 ## Referencias Externas
 
-- Logo original en: `/Users/josepbaratech/Statera/reflex_dashboard/assets/logo.svg`
+- Logos oficiales: `public/brand/` (fuente: Drive "Statera branding")
 - Repo principal Statera: `/Users/josepbaratech/Statera`
 - Referencia de diseño: embedsocial.com/social-listening/x/
 
@@ -71,4 +76,4 @@ npm run dev
 
 ---
 
-**Última actualización**: 7 Nov 2024
+**Última actualización**: 8 Nov 2026

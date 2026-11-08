@@ -1,37 +1,26 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { ChevronUp } from 'lucide-react'
+import { ArrowUp } from 'lucide-react'
 
 export default function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false)
 
-  const toggleVisibility = () => {
-    if (typeof window !== 'undefined') {
-      setIsVisible(window.scrollY > 300)
-    }
-  }
-
-  const scrollToTop = () => {
-    if (typeof window !== 'undefined') {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-    }
-  }
-
   useEffect(() => {
-    window.addEventListener('scroll', toggleVisibility)
-    return () => {
-      window.removeEventListener('scroll', toggleVisibility)
-    }
+    const onScroll = () => setIsVisible(window.scrollY > 600)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  return isVisible ? (
+  if (!isVisible) return null
+
+  return (
     <button
-      onClick={scrollToTop}
-      className="fixed bottom-8 right-8 w-10 h-10 bg-accent text-white rounded-full flex items-center justify-center hover:bg-opacity-90 transition-all shadow-lg z-40"
-      aria-label="Scroll to top"
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      className="fixed bottom-6 right-6 z-40 flex h-11 w-11 animate-fade-in items-center justify-center rounded-full bg-burgundy text-cream shadow-lg ring-1 ring-cream/20 transition-colors hover:bg-wine"
+      aria-label="Volver arriba"
     >
-      <ChevronUp className="w-5 h-5" />
+      <ArrowUp className="h-4 w-4" />
     </button>
-  ) : null
+  )
 }

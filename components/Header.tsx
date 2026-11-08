@@ -1,75 +1,79 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import clsx from 'clsx'
 import { Menu, X } from 'lucide-react'
 import BetaModal from './BetaModal'
+import Logo from './Logo'
+
+const navItems = [
+  { label: 'Plataforma', href: '/#features' },
+  { label: 'Metodología', href: '/#how-it-works' },
+  { label: 'Analytics', href: '/#analytics' },
+  { label: 'FAQ', href: '/faq' },
+]
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const [betaModalOpen, setBetaModalOpen] = useState(false)
 
-  const navItems = [
-    { label: 'Features', href: '#features' },
-    { label: 'Cómo funciona', href: '#how-it-works' },
-    { label: 'Analytics', href: '#analytics' },
-  ]
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   return (
-    <header className="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 border-b border-gray-200">
-      <nav className="max-w-7xl mx-auto px-6 py-2 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-3">
-          <img
-            src="/logo.svg"
-            alt="Statera"
-            className="h-12 w-auto"
-          />
+    <header
+      className={clsx(
+        'fixed top-0 z-50 w-full transition-colors duration-300',
+        scrolled || isOpen
+          ? 'border-b border-butter bg-cream/95 backdrop-blur-md'
+          : 'border-b border-transparent bg-transparent'
+      )}
+    >
+      <nav className="mx-auto flex h-20 max-w-6xl items-center justify-between px-6">
+        <Link href="/" aria-label="Statera — inicio" className="shrink-0">
+          <Logo className="w-[140px] md:w-[156px]" />
         </Link>
 
-        {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden items-center gap-10 md:flex">
           {navItems.map((item) => (
             <a
               key={item.label}
               href={item.href}
-              className="text-gray-700 hover:text-accent transition-colors font-medium"
+              className="text-sm font-light tracking-body text-ink/80 transition-colors hover:text-wine"
             >
               {item.label}
             </a>
           ))}
         </div>
 
-        {/* CTA Button */}
-        <button
-          onClick={() => setBetaModalOpen(true)}
-          className="hidden md:block px-6 py-2 bg-accent text-white rounded-lg hover:bg-opacity-90 transition-all font-medium"
-        >
-          Acceso Beta
+        <button onClick={() => setBetaModalOpen(true)} className="btn-primary hidden py-2.5 text-sm md:inline-flex">
+          Solicitar acceso
         </button>
 
-        {/* Mobile Menu Button */}
         <button
-          className="md:hidden p-2"
+          className="p-2 md:hidden"
           onClick={() => setIsOpen(!isOpen)}
+          aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
+          aria-expanded={isOpen}
         >
-          {isOpen ? (
-            <X className="w-6 h-6 text-primary" />
-          ) : (
-            <Menu className="w-6 h-6 text-primary" />
-          )}
+          {isOpen ? <X className="h-6 w-6 text-burgundy" /> : <Menu className="h-6 w-6 text-burgundy" />}
         </button>
       </nav>
 
-      {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-white border-t border-gray-200">
-          <div className="px-6 py-4 space-y-3">
+        <div className="border-t border-butter bg-cream md:hidden">
+          <div className="space-y-1 px-6 py-4">
             {navItems.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
-                className="block text-gray-700 hover:text-accent font-medium"
+                className="block py-2 font-light tracking-body text-ink hover:text-wine"
                 onClick={() => setIsOpen(false)}
               >
                 {item.label}
@@ -80,9 +84,9 @@ export default function Header() {
                 setBetaModalOpen(true)
                 setIsOpen(false)
               }}
-              className="w-full mt-4 px-6 py-2 bg-accent text-white rounded-lg font-medium"
+              className="btn-primary mt-4 w-full"
             >
-              Acceso Beta
+              Solicitar acceso
             </button>
           </div>
         </div>
